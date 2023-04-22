@@ -3,7 +3,7 @@ defmodule Follow.InMemoryEventStoreCase do
 
   alias Commanded.EventStore.Adapters.InMemory
 
-  setup tags do
+  setup do
     {:ok, _} = Application.ensure_all_started(:follow)
 
     on_exit(fn ->
