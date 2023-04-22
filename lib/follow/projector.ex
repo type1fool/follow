@@ -5,7 +5,7 @@ defmodule Follow.Projector do
     name: "subscription_projection"
 
   alias Follow.Events.SubscriptionCreated
-  alias Follow.Projections.SubscriptionProjection
+  alias Follow.SubscriptionProjection
 
   project %SubscriptionCreated{user_id: user_id, initial_status: status}, _metadata, fn multi ->
     Ecto.Multi.insert(multi, :subscription_projection, %SubscriptionProjection{
