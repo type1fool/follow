@@ -2,25 +2,38 @@ defmodule Follow.Accounts.Subscription do
   @moduledoc """
   A struct representing a subscription.
   """
-  use Ecto.Schema
-  import Ecto.Changeset
+  alias Follow.Accounts.CreateSubscription
+  alias Follow.Accounts.SubscriptionCreated
 
-  @statuses [:new, :active, :inactive, :suspended, :locked, :deleted]
-  @type status :: :new | :active | :inactive | :suspended | :locked | :deleted
+  @statuses [:trial, :active, :inactive, :suspended, :locked]
   defguard is_status(status) when status in @statuses
 
-  @derive Jason.Encoder
-  @primary_key false
-  schema "subscriptions" do
-    field :user_id, :id
-    field :status, Ecto.Enum, values: @statuses
+  defstruct [:user_id, :status]
+
+  # API
+
+  def execute(%__MODULE__{user_id: nil}, %CreateSubscription{
+        user_id: user_id,
+        initial_status: initial_status
+      })
+      when is_status(initial_status) do
+    %SubscriptionCreated{user_id: user_id, initial_status: initial_status}
   end
 
-  def changeset(%__MODULE__{} = data, attrs \\ %{}) do
-    data
-    |> cast(attrs, [:user_id, :status])
-    |> validate_required(__MODULE__.__schema__(:fields))
-    |> validate_number(:user_id, greater_than: 0)
-    |> validate_inclusion(:status, @statuses)
+  def execute(%__MODULE__{}, %CreateSubscription{initial_status: initial_status})
+      when initial_status not in [:trial, :active] do
+    {:error, :invalid_status}
+  end
+
+  def execute(%__MODULE__{}, %CreateSubscription{}) do
+    {:error, :subscription_already_created}
+  end
+
+  # MUTATORS
+
+  def apply(%__MODULE__{} = subscription, %SubscriptionCreated{} = event) do
+    %{user_id: user_id, initial_status: initial_status} = event
+
+    %__MODULE__{subscription | user_id: user_id, status: initial_status}
   end
 end
