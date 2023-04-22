@@ -5,15 +5,6 @@ defmodule Follow.Application do
 
   use Application
 
-  use Commanded.Application,
-    otp_app: :follow,
-    event_store: [
-      adapter: Commanded.EventStore.Adapters.EventStore,
-      event_store: Follow.EventStore
-    ]
-
-  router(Follow.AccountRouter)
-
   @impl true
   def start(_type, _args) do
     children = [
@@ -21,6 +12,10 @@ defmodule Follow.Application do
       FollowWeb.Telemetry,
       # Start the Ecto repository
       Follow.Repo,
+      # Start the Accounts app
+      Follow.Accounts,
+      # Start the Subscription handler
+      Follow.Accounts.SubscriptionHandler,
       # Start the PubSub system
       {Phoenix.PubSub, name: Follow.PubSub},
       # Start Finch
