@@ -4,6 +4,7 @@
   - [Overview](#overview)
     - [🎬 Enter Event Sourcing](#-enter-event-sourcing)
   - [Benefits](#benefits)
+  - [Caveats](#caveats)
   - [📓 Terminology](#-terminology)
   - [🍱 CQRS: Command Query Responsibility Segregation](#-cqrs-command-query-responsibility-segregation)
   - [User Profile Example](#user-profile-example)
@@ -46,8 +47,15 @@ The primary aggregate may be the event store for user profile events, and anothe
 ## Benefits
 
 - Simplified access control
+- Better separation of concerns
 - Independent performance tuning on write and read repos
 - No contention during concurrent updates on the same record
+
+## Caveats
+
+- Application logic and deployment may be more complext compared to CRUD
+- Failures must be handled
+- Eventual consistency may be undesirable, (though configuration may allow stronger consistency)
 
 ## 📓 Terminology
 
