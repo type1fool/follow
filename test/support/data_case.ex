@@ -30,11 +30,6 @@ defmodule Follow.DataCase do
 
   setup tags do
     Follow.DataCase.setup_sandbox(tags)
-    {:ok, _} = Application.ensure_all_started(:follow)
-
-    on_exit(fn ->
-      :ok = Application.stop(:follow)
-    end)
 
     :ok
   end
