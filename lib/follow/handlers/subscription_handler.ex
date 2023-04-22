@@ -1,9 +1,9 @@
-defmodule Follow.Accounts.SubscriptionHandler do
+defmodule Follow.Handlers.SubscriptionHandler do
   use Commanded.Event.Handler,
     application: Follow.Events,
     name: __MODULE__
 
-  alias Follow.Accounts.SubscriptionCreated
+  alias Follow.Events.SubscriptionCreated
 
   def init do
     with {:ok, _pid} <- Agent.start_link(fn -> :inactive end, name: __MODULE__) do

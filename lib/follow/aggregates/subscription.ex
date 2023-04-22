@@ -1,9 +1,9 @@
-defmodule Follow.Accounts.Subscription do
+defmodule Follow.Aggregates.Subscription do
   @moduledoc """
   A struct representing a subscription.
   """
-  alias Follow.Accounts.CreateSubscription
-  alias Follow.Accounts.SubscriptionCreated
+  alias Follow.Commands.CreateSubscription
+  alias Follow.Events.SubscriptionCreated
 
   @statuses [:trial, :active, :inactive, :suspended, :locked]
   defguard is_status(status) when status in @statuses

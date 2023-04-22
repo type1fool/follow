@@ -1,4 +1,4 @@
-defmodule Follow.Accounts.SubscriptionCreated do
+defmodule Follow.Events.SubscriptionCreated do
   @derive Jason.Encoder
   defstruct [:user_id, :initial_status]
 end
