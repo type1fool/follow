@@ -16,6 +16,7 @@ defmodule Follow.Application do
       Follow.Events,
       # Start the Subscription handler
       Follow.Handlers.SubscriptionHandler,
+      Follow.Projector,
       # Start the PubSub system
       {Phoenix.PubSub, name: Follow.PubSub},
       # Start Finch
