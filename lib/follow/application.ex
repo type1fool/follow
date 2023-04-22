@@ -12,6 +12,8 @@ defmodule Follow.Application do
       event_store: Follow.EventStore
     ]
 
+  router(Follow.AccountRouter)
+
   @impl true
   def start(_type, _args) do
     children = [
