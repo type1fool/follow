@@ -1,5 +1,16 @@
 # 🤓 Event Sourcing for Newbz
 
+- [🤓 Event Sourcing for Newbz](#-event-sourcing-for-newbz)
+  - [Overview](#overview)
+    - [🎬 Enter Event Sourcing](#-enter-event-sourcing)
+  - [Benefits](#benefits)
+  - [📓 Terminology](#-terminology)
+  - [🍱 CQRS: Command Query Responsibility Segregation](#-cqrs-command-query-responsibility-segregation)
+  - [User Profile Example](#user-profile-example)
+
+
+## Overview
+
 > Written by an event sourcing newb.
 
 Software applications are responsible for managing data changes over time.
@@ -32,6 +43,12 @@ Event subscriptions allow components within the system to respond to changes in 
 
 The primary aggregate may be the event store for user profile events, and another aggregate may be Phoenix PubSub. PubSub would allow other Elixir processes to subscribe and handle event messages when they happen. So, the update event could be dispatched to both the event store and a LiveView concurrently; the new values would be rendered to the user interface while the event system stores the event and updates the aggregate database.
 
+## Benefits
+
+- Simplified access control
+- Independent performance tuning on write and read repos
+- No contention during concurrent updates on the same record
+
 ## 📓 Terminology
 
 So far, you have likely seen words which may be unfamiliar and confusing. Event sourcing concepts and tooling introduce a set of terms uncommon in CRUD application.
@@ -47,6 +64,9 @@ The table below lists ES terms, synonyms which may be more familiar, and brief d
 | Metadata  |                                                       |                                                                                | N/A     |
 
 With event sourcing, it's important to think about grammar. Nouns, verbs, and tenses are used to codify events happening in an application.
+
+- A command is represented as a present tense verb and a noun, ie `CreateSubscription`.
+- An event successfully generated from a command is represented as a noun followed by a past tense verb, ie `SubscriptionCreated`.
 
 ## 🍱 CQRS: Command Query Responsibility Segregation
 
@@ -75,6 +95,8 @@ flowchart LR
     Aggregate -- Read --> UI
   end
 ```
+
+In this example, event data is stored in a separate database from aggregate data. However, this is not a strict requirement. Event table may live alongside aggregate tables in the same database, but writes should only be executed on the event tables and reads should only be queried against the aggregate tables. Within a single database roles and schemas/prefixes may help enforce this boundary.
 
 ## User Profile Example
 
