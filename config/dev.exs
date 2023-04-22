@@ -4,7 +4,7 @@ config :follow, Follow.EventStore,
   serializer: Commanded.Serialization.JsonSerializer,
   username: "postgres",
   password: "postgres",
-  database: "follow_dev",
+  database: "follow_events_dev",
   hostname: "localhost",
   pool_size: 10
 
