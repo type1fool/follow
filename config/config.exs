@@ -8,7 +8,8 @@
 import Config
 
 config :follow,
-  ecto_repos: [Follow.Repo]
+  ecto_repos: [Follow.Repo],
+  event_stores: [Follow.EventStore]
 
 # Configures the endpoint
 config :follow, FollowWeb.Endpoint,

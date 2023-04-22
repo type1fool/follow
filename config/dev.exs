@@ -1,5 +1,13 @@
 import Config
 
+config :follow, Follow.EventStore,
+  serializer: Commanded.Serialization.JsonSerializer,
+  username: "postgres",
+  password: "postgres",
+  database: "follow_dev",
+  hostname: "localhost",
+  pool_size: 10
+
 # Configure your database
 config :follow, Follow.Repo,
   username: "postgres",
