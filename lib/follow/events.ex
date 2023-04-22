@@ -1,4 +1,4 @@
-defmodule Follow.Accounts do
+defmodule Follow.Events do
   use Commanded.Application,
     otp_app: :follow,
     event_store: [

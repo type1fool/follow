@@ -13,7 +13,7 @@ defmodule Follow.Application do
       # Start the Ecto repository
       Follow.Repo,
       # Start the Accounts app
-      Follow.Accounts,
+      Follow.Events,
       # Start the Subscription handler
       Follow.Accounts.SubscriptionHandler,
       # Start the PubSub system

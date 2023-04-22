@@ -1,6 +1,6 @@
 defmodule Follow.Accounts.SubscriptionHandler do
   use Commanded.Event.Handler,
-    application: Follow.Accounts,
+    application: Follow.Events,
     name: __MODULE__
 
   alias Follow.Accounts.SubscriptionCreated

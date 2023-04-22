@@ -1,6 +1,6 @@
 import Config
 
-config :follow, Follow.Accounts,
+config :follow, Follow.Events,
   event_store: [
     adapter: Commanded.EventStore.Adapters.InMemory,
     serializer: Commanded.Serialization.JsonSerializer
