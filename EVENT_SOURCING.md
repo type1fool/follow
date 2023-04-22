@@ -49,7 +49,7 @@ The primary aggregate may be the event store for user profile events, and anothe
 - Simplified access control
 - Better separation of concerns
 - Independent performance tuning on write and read repos
-- No contention during concurrent updates on the same record
+- Better collaboration: No contention during concurrent updates on the same record
 
 ## Caveats
 
