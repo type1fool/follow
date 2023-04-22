@@ -4,7 +4,13 @@ defmodule Follow.Application do
   @moduledoc false
 
   use Application
-  use Commanded.Application, otp_app: :follow
+
+  use Commanded.Application,
+    otp_app: :follow,
+    event_store: [
+      adapter: Commanded.EventStore.Adapters.EventStore,
+      event_store: Follow.EventStore
+    ]
 
   @impl true
   def start(_type, _args) do
