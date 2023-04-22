@@ -11,6 +11,8 @@ config :follow,
   ecto_repos: [Follow.Repo],
   event_stores: [Follow.EventStore]
 
+config :follow, Follow.EventStore, serializer: Commanded.Serialization.JsonSerializer
+
 # Configures the endpoint
 config :follow, FollowWeb.Endpoint,
   url: [host: "localhost"],

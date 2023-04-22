@@ -1,5 +1,11 @@
 import Config
 
+config :follow, Follow.Events,
+  event_store: [
+    adapter: Commanded.EventStore.Adapters.InMemory,
+    serializer: Commanded.Serialization.JsonSerializer
+  ]
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -9,7 +15,7 @@ config :follow, Follow.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "follow_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "follow_aggregates_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 

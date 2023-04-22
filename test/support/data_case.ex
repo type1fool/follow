@@ -24,11 +24,13 @@ defmodule Follow.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Follow.DataCase
+      import Commanded.Assertions.EventAssertions
     end
   end
 
   setup tags do
     Follow.DataCase.setup_sandbox(tags)
+
     :ok
   end
 
