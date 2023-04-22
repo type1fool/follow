@@ -13,7 +13,7 @@ config :follow, Follow.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "follow_dev",
+  database: "follow_aggregates_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

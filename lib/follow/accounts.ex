@@ -4,7 +4,9 @@ defmodule Follow.Accounts do
     event_store: [
       adapter: Commanded.EventStore.Adapters.EventStore,
       event_store: Follow.EventStore
-    ]
+    ],
+    pubsub: :local,
+    registry: :local
 
   router(Follow.AccountRouter)
 end

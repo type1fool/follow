@@ -9,9 +9,7 @@ import Config
 
 config :follow,
   ecto_repos: [Follow.Repo],
-  event_stores: [Follow.EventStore],
-  pubsub: :local,
-  registry: :local
+  event_stores: [Follow.EventStore]
 
 # Configures the endpoint
 config :follow, FollowWeb.Endpoint,
