@@ -4,6 +4,7 @@ defmodule Follow.Application do
   @moduledoc false
 
   use Application
+  use Commanded.Application, otp_app: :follow
 
   @impl true
   def start(_type, _args) do
