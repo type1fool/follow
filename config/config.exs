@@ -11,7 +11,10 @@ config :follow,
   ecto_repos: [Follow.Repo],
   event_stores: [Follow.EventStore]
 
-config :follow, Follow.EventStore, serializer: Commanded.Serialization.JsonSerializer
+config :follow, Follow.EventStore,
+  serializer: Commanded.Serialization.JsonSerializer,
+  column_data_type: "jsonb",
+  types: EventStore.PostgresTypes
 
 # Configures the endpoint
 config :follow, FollowWeb.Endpoint,
