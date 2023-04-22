@@ -52,6 +52,32 @@ With event sourcing, it's important to think about grammar. Nouns, verbs, and te
 
 So far, you've seen new concepts and terms focussed on event sourcing. There is a complimentary concept called Command Query Responsibility Segregation (CQRS), which further distinguishes between **writing** and **reading** data.
 
+The following diagram illustrates the lifecycle of an event triggered by a user interface:
+
+```mermaid
+flowchart LR
+  UI((User Interface))
+  Handler((Handler))
+  Validation((Validation))
+  Commands((Commands))
+  Events[(Events)]
+  Aggregate[(Aggregate)]
+
+  subgraph App
+    UI -- Submit --> Handler
+    Handler --> Commands
+    Commands --> Validation
+  end
+
+  subgraph Persistence
+    Validation -- Write ---> Events
+    Events -- Write ---> Aggregate
+    Aggregate -- Read --> UI
+  end
+```
+
+## User Profile Example
+
 > ⚠️ This diagram is a WIP, and not yet accurate.
 
 ```mermaid
