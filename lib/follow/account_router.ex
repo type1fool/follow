@@ -3,5 +3,5 @@ defmodule Follow.AccountRouter do
   alias Follow.Accounts.Subscription
   alias Follow.Accounts.CreateSubscription
 
-  dispatch(CreateSubscription, to: Subscription, identity: :subscription)
+  dispatch(CreateSubscription, to: Subscription, identity: :user_id)
 end
