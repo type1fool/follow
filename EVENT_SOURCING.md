@@ -38,13 +38,13 @@ So far, you have likely seen words which may be unfamiliar and confusing. Event 
 
 The table below lists ES terms, synonyms which may be more familiar, and brief descriptions:
 
-| ES Term   | Synonyms                                               | Description                                                                    | Tense   |
-| --------- | ------------------------------------------------------ | ------------------------------------------------------------------------------ | ------- |
-| Event     | Action, Verb                                           | Activity which must be persisted.                                              | Past    |
-| Aggregate | Noun, Current State, Calculated Values, Derived Values | A model or schema representing the current state derived from an event stream. | N/A     |
-| Command   | Request, Create, Update, Delete                        | An instruction to the application that an event has happened.                  | Present |
-| Query     | Read, List                                             |                                                                                | N/A     |
-| Metadata  |                                                        |                                                                                | N/A     |
+| ES Term   | Synonyms                                              | Description                                                                    | Tense   |
+| --------- | ----------------------------------------------------- | ------------------------------------------------------------------------------ | ------- |
+| Event     | Action, Verb                                          | Activity which must be persisted.                                              | Past    |
+| Aggregate | Noun, Current State, Calculated/Derived/Merged Values | A model or schema representing the current state derived from an event stream. | N/A     |
+| Command   | Request, Create, Update, Delete                       | An instruction to the application that an event has happened.                  | Present |
+| Query     | Read, List                                            |                                                                                | N/A     |
+| Metadata  |                                                       |                                                                                | N/A     |
 
 With event sourcing, it's important to think about grammar. Nouns, verbs, and tenses are used to codify events happening in an application.
 
