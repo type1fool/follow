@@ -1,4 +1,4 @@
-defmodule Follow.Aggregates.Subscription do
+defmodule Follow.Aggregates.SubscriptionAggregate do
   @moduledoc """
   A struct representing a subscription.
   """
