@@ -1,16 +1,16 @@
-defmodule Follow.SubscriptionProjection do
+defmodule Follow.Subscriptions.Projection do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Follow.SubscriptionAggregate
+  alias Follow.Subscriptions.Aggregate
 
-  @statuses SubscriptionAggregate.get_statuses()
+  @statuses Aggregate.get_statuses()
 
   @primary_key {:user_id, :id, autogenerate: false}
   schema "subscription_projections" do
     field :status, Ecto.Enum, values: @statuses
   end
 
-  def update_changeset(%__MODULE__{} = data, attrs) do
+  def changeset(%__MODULE__{} = data, attrs) do
     data
     |> cast(attrs, [:user_id, :status])
     |> validate_required(__MODULE__.__schema__(:fields))

@@ -1,4 +1,4 @@
-defmodule Follow.Repo.Migrations.AddSubscriptionProjections do
+defmodule Follow.Repo.Migrations.AddProjections do
   use Ecto.Migration
 
   def change do

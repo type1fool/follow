@@ -1,10 +1,10 @@
-defmodule Follow.SubscriptionHandler do
+defmodule Follow.Subscriptions.Handler do
   use Commanded.Event.Handler,
     application: Follow.Events,
     name: __MODULE__
 
-  alias Follow.SubscriptionCreatedEvent
-  alias Follow.SubscriptionUpdatedEvent
+  alias Follow.Subscriptions.Events.Created
+  alias Follow.Subscriptions.Events.Updated
 
   def init do
     with {:ok, _pid} <- Agent.start_link(fn -> :inactive end, name: __MODULE__) do
@@ -12,11 +12,11 @@ defmodule Follow.SubscriptionHandler do
     end
   end
 
-  def handle(%SubscriptionCreatedEvent{initial_status: initial_status}, _metadata) do
+  def handle(%Created{initial_status: initial_status}, _metadata) do
     Agent.update(__MODULE__, fn _ -> initial_status end)
   end
 
-  def handle(%SubscriptionUpdatedEvent{new_status: new_status}, _metadata) do
+  def handle(%Updated{new_status: new_status}, _metadata) do
     Agent.update(__MODULE__, fn _ -> new_status end)
   end
 

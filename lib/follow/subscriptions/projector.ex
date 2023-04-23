@@ -1,26 +1,26 @@
-defmodule Follow.Projector do
+defmodule Follow.Subscriptions.Projector do
   use Commanded.Projections.Ecto,
     application: Follow.Events,
     repo: Follow.Repo,
     name: "subscription_projection"
 
-  alias Follow.SubscriptionCreatedEvent
-  alias Follow.SubscriptionUpdatedEvent
-  alias Follow.SubscriptionProjection
+  alias Follow.Subscriptions.Events.Created
+  alias Follow.Subscriptions.Events.Updated
+  alias Follow.Subscriptions.Projection
 
-  project %SubscriptionCreatedEvent{user_id: user_id, initial_status: status},
+  project %Created{user_id: user_id, initial_status: status},
           _metadata,
           fn multi ->
-            Ecto.Multi.insert(multi, :subscription_projection, %SubscriptionProjection{
+            Ecto.Multi.insert(multi, :subscription_projection, %Projection{
               user_id: user_id,
               status: status
             })
           end
 
-  project %SubscriptionUpdatedEvent{user_id: user_id, new_status: status},
+  project %Updated{user_id: user_id, new_status: status},
           _metadata,
           fn multi ->
-            case Follow.Repo.get(SubscriptionProjection, user_id) do
+            case Follow.Repo.get(Projection, user_id) do
               nil ->
                 multi
 
@@ -31,7 +31,7 @@ defmodule Follow.Projector do
                 Ecto.Multi.update(
                   multi,
                   :subscription_projection,
-                  SubscriptionProjection.update_changeset(sub, attrs)
+                  Projection.changeset(sub, attrs)
                 )
             end
           end
