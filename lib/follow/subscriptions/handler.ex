@@ -1,4 +1,7 @@
 defmodule Follow.Subscriptions.Handler do
+  @moduledoc """
+  Handler for subscription events.
+  """
   use Commanded.Event.Handler,
     application: Follow.Events,
     name: __MODULE__

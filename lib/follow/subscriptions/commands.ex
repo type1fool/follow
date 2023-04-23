@@ -1,7 +1,12 @@
-defmodule Follow.Subscriptions.Commands.Create do
-  defstruct [:user_id, :initial_status]
-end
+defmodule Follow.Subscriptions.Commands do
+  @moduledoc """
+  Subscription command structs.
+  """
+  defmodule Create do
+    defstruct [:user_id, :initial_status]
+  end
 
-defmodule Follow.Subscriptions.Commands.Update do
-  defstruct [:user_id, :new_status]
+  defmodule Update do
+    defstruct [:user_id, :new_status]
+  end
 end

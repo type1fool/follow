@@ -1,4 +1,7 @@
 defmodule Follow.Subscriptions.Projection do
+  @moduledoc """
+  Ecto schema representing the current state of a subscription.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias Follow.Subscriptions.Aggregate

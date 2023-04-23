@@ -1,4 +1,7 @@
 defmodule Follow.Subscriptions.Projector do
+  @moduledoc """
+  Subscription event projector.
+  """
   use Commanded.Projections.Ecto,
     application: Follow.Events,
     repo: Follow.Repo,
@@ -11,6 +14,8 @@ defmodule Follow.Subscriptions.Projector do
   project %Created{user_id: user_id, initial_status: status},
           _metadata,
           fn multi ->
+            status = String.to_existing_atom(status)
+
             Ecto.Multi.insert(multi, :subscription_projection, %Projection{
               user_id: user_id,
               status: status

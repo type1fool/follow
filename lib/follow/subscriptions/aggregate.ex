@@ -1,6 +1,6 @@
 defmodule Follow.Subscriptions.Aggregate do
   @moduledoc """
-  A struct representing a subscription.
+  A struct and functions for validating subscription commands and events.
   """
   alias Follow.Subscriptions.Commands.Create
   alias Follow.Subscriptions.Commands.Update
