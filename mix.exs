@@ -9,7 +9,8 @@ defmodule Follow.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
@@ -74,6 +75,21 @@ defmodule Follow.MixProject do
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
       "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+    ]
+  end
+
+  defp docs do
+    [
+      main: "Follow",
+      extras: ["README.md"],
+      formatters: ["html"],
+      nest_modules_by_prefix: [
+        Follow.Subscriptions
+      ],
+      groups_for_modules: [
+        Core: ~r/Follow\./,
+        Web: ~r/FollowWeb/
+      ]
     ]
   end
 end
