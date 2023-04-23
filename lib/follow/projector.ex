@@ -4,13 +4,35 @@ defmodule Follow.Projector do
     repo: Follow.Repo,
     name: "subscription_projection"
 
-  alias Follow.Events.SubscriptionCreated
+  alias Follow.SubscriptionCreatedEvent
+  alias Follow.SubscriptionUpdatedEvent
   alias Follow.SubscriptionProjection
 
-  project %SubscriptionCreated{user_id: user_id, initial_status: status}, _metadata, fn multi ->
-    Ecto.Multi.insert(multi, :subscription_projection, %SubscriptionProjection{
-      user_id: user_id,
-      status: status
-    })
-  end
+  project %SubscriptionCreatedEvent{user_id: user_id, initial_status: status},
+          _metadata,
+          fn multi ->
+            Ecto.Multi.insert(multi, :subscription_projection, %SubscriptionProjection{
+              user_id: user_id,
+              status: status
+            })
+          end
+
+  project %SubscriptionUpdatedEvent{user_id: user_id, new_status: status},
+          _metadata,
+          fn multi ->
+            case Follow.Repo.get(SubscriptionProjection, user_id) do
+              nil ->
+                multi
+
+              sub ->
+                status = String.to_existing_atom(status)
+                attrs = %{user_id: user_id, status: status}
+
+                Ecto.Multi.update(
+                  multi,
+                  :subscription_projection,
+                  SubscriptionProjection.update_changeset(sub, attrs)
+                )
+            end
+          end
 end

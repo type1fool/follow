@@ -8,5 +8,5 @@ defmodule Follow.Events do
     pubsub: :local,
     registry: :local
 
-  router(Follow.Routers.AccountRouter)
+  router(Follow.AccountRouter)
 end
