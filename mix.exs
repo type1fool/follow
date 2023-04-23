@@ -35,6 +35,7 @@ defmodule Follow.MixProject do
       {:commanded, "~> 1.4"},
       {:commanded_ecto_projections, "~> 1.3"},
       {:commanded_eventstore_adapter, "~> 1.4"},
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
       {:phoenix, "~> 1.7.2"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
