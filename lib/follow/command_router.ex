@@ -1,4 +1,7 @@
-defmodule Follow.EventRouter do
+defmodule Follow.CommandRouter do
+  @moduledoc """
+  Routes commands to aggregates.
+  """
   use Commanded.Commands.Router
   alias Follow.Subscriptions
 
