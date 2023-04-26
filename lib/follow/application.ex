@@ -15,7 +15,6 @@ defmodule Follow.Application do
       # Start the Accounts app
       Follow.Events,
       # Start the Subscription handler
-      Follow.Subscriptions.Handler,
       Follow.Subscriptions.Projector,
       # Start the PubSub system
       {Phoenix.PubSub, name: Follow.PubSub},
