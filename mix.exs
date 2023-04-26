@@ -4,12 +4,13 @@ defmodule Follow.MixProject do
   def project do
     [
       app: :follow,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
@@ -33,7 +34,9 @@ defmodule Follow.MixProject do
   defp deps do
     [
       {:commanded, "~> 1.4"},
+      {:commanded_ecto_projections, "~> 1.3"},
       {:commanded_eventstore_adapter, "~> 1.4"},
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
       {:phoenix, "~> 1.7.2"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
@@ -72,6 +75,21 @@ defmodule Follow.MixProject do
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
       "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+    ]
+  end
+
+  defp docs do
+    [
+      main: "Follow",
+      extras: ["README.md"],
+      formatters: ["html"],
+      nest_modules_by_prefix: [
+        Follow.Subscriptions
+      ],
+      groups_for_modules: [
+        Core: ~r/Follow\./,
+        Web: ~r/FollowWeb/
+      ]
     ]
   end
 end

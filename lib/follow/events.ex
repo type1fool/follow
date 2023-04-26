@@ -1,4 +1,7 @@
 defmodule Follow.Events do
+  @moduledoc """
+  A `Commanded.Application` for event sourcing and CQRS.
+  """
   use Commanded.Application,
     otp_app: :follow,
     event_store: [
@@ -8,5 +11,5 @@ defmodule Follow.Events do
     pubsub: :local,
     registry: :local
 
-  router(Follow.Routers.AccountRouter)
+  router(Follow.CommandRouter)
 end

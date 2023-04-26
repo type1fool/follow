@@ -1,0 +1,55 @@
+# Subscriptions
+
+```elixir
+project_path = "~/projects/follow"
+
+Mix.install(
+  [
+    {:follow, path: project_path, env: :dev, runtime: true},
+    {:kino_db, "~> 0.2.1"},
+    {:postgrex, "~> 0.16.3"}
+  ],
+  config_path: "#{project_path}/config/config.exs",
+  lockfile: "#{project_path}/mix.lock"
+)
+```
+
+## Events
+
+```elixir
+user_id = System.unique_integer([:positive])
+
+:ok =
+  Follow.Events.dispatch(%Follow.Subscriptions.Commands.Create{
+    user_id: user_id,
+    initial_status: :active
+  })
+```
+
+```elixir
+:ok =
+  Follow.Events.dispatch(%Follow.Subscriptions.Commands.Update{
+    user_id: user_id,
+    new_status: :suspended
+  })
+```
+
+<!-- livebook:{"attrs":{"database":"follow_aggregates_dev","hostname":"localhost","password_secret":"POSTGRES_USERNAME","port":5432,"type":"postgres","use_ipv6":false,"username":"postgres","variable":"repo"},"chunks":null,"kind":"Elixir.KinoDB.ConnectionCell","livebook_object":"smart_cell"} -->
+
+```elixir
+opts = [
+  hostname: "localhost",
+  port: 5432,
+  username: "postgres",
+  password: System.fetch_env!("LB_POSTGRES_USERNAME"),
+  database: "follow_aggregates_dev"
+]
+
+{:ok, repo} = Kino.start_child({Postgrex, opts})
+```
+
+<!-- livebook:{"attrs":{"cache_query":true,"connection":{"type":"postgres","variable":"repo"},"query":"select * from subscription_projections limit 100","result_variable":"subscriptions","timeout":null},"chunks":null,"kind":"Elixir.KinoDB.SQLCell","livebook_object":"smart_cell"} -->
+
+```elixir
+subscriptions = Postgrex.query!(repo, "select * from subscription_projections limit 100", [])
+```
